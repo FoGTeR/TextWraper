@@ -27,7 +27,7 @@ import pyautogui
 import numpy as np
 
 async def send_image_and_receive_text(region):
-    async with websockets.connect("ws://0.0.0.0:8765") as websocket:
+    async with websockets.connect("ws://132.226.207.145:8765") as websocket:
         screenshot = pyautogui.screenshot(region=region)
         screenshot.save(os.path.dirname(os.path.realpath(__file__)) + "\\png.png")
         with open(os.path.dirname(os.path.realpath(__file__)) + "\\png.png", "rb") as file:
@@ -233,7 +233,7 @@ class MainWindow(QMainWindow):
         # Copy image to clipboard.
         win32clipboard.OpenClipboard()
         win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardText(text)
+        win32clipboard.SetClipboardData(win32clipboard.CF_UNICODETEXT, text)
         #win32clipboard.SetClipboardData(win32clipboard.CF_DIB, data)
         win32clipboard.CloseClipboard()
 
@@ -367,7 +367,7 @@ class MainWindow(QMainWindow):
                                            self.width(),
                                            self.button_window_height)
             self.button_window.show()
-        
+
         elif event.type() == QEvent.Hide:
             while True:
                 time.sleep(0.2)
