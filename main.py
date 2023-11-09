@@ -27,7 +27,7 @@ import pyautogui
 import numpy as np
 
 async def send_image_and_receive_text(region):
-    async with websockets.connect("ws://132.226.207.145:8765") as websocket:
+    async with websockets.connect("ws://0.0.0.0:8765") as websocket:
         screenshot = pyautogui.screenshot(region=region)
         screenshot.save(os.path.dirname(os.path.realpath(__file__)) + "\\png.png")
         with open(os.path.dirname(os.path.realpath(__file__)) + "\\png.png", "rb") as file:
@@ -42,7 +42,6 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
 
-        # Class Instance Variables.
         self.mouse_relative_position_x = 0
         self.mouse_relative_position_y = 0
         self.button_window_height = 50
@@ -92,10 +91,10 @@ class MainWindow(QMainWindow):
 
         screen_width = QApplication.primaryScreen().size().width()
         screen_height = QApplication.primaryScreen().size().height()
-        self.setGeometry(int(screen_width / 2) - int(self.geometry().width() / 2),  # x position
-                         int(screen_height / 2) - int(self.geometry().height() / 2),  # y position
-                         400,  # width
-                         300)  # height
+        self.setGeometry(int(screen_width / 2) - int(self.geometry().width() / 2),
+                         int(screen_height / 2) - int(self.geometry().height() / 2),
+                         400,
+                         300)
 
         file_name = os.path.dirname(os.path.realpath(__file__)) + "\\icon.png"
         if path.exists(file_name):
